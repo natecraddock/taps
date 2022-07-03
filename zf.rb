@@ -5,14 +5,17 @@ class Zf < Formula
   sha256 "3b5ff72571867f22d51dd1e349c86bf4b00b90604ff3f26de1b95bf752523e8e"
   license "MIT"
   head "https://github.com/natecraddock/zf.git", branch: "master"
-  version "0.5"
 
   depends_on "zig" => :build
 
   def install
     system "zig", "build", "-Drelease-fast=true"
-    man1.install "doc/zf.1"
+
     bin.install "zig-out/bin/zf"
+    man1.install "doc/zf.1"
+    bash_completion.install "complete/zf"
+    fish_completion.install "complete/zf.fish"
+    zsh_completion.install "complete/_zf"
   end
 
   test do
